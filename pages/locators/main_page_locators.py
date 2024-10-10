@@ -5,4 +5,3 @@ class MainPageLocators:
     WIDGETS_CARD = "//h5[text()='Widgets']"
     INTERACTIONS_CARD = "//h5[text()='Interactions']"
     BOOK_STORE_CARD = "//h5[text()='Book Store Application']"
-    HEADER = "//header/a"

@@ -1,5 +1,4 @@
 import pytest
-
 from base.base_test import BaseTest
 
 
@@ -25,5 +24,5 @@ class TestMainPage(BaseTest):
         self.main_page.click_forms_card()
         assert config.FORMS_URL == self.elements_page.get_url()
 
-    def test_header_visible(self):
-        assert self.main_page.is_visible(self.main_page.get_header())
+    def test_header_visible(self,config):
+        assert self.main_page.is_header_visible()

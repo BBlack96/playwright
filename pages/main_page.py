@@ -1,4 +1,5 @@
 from base.base_page import BasePage
+from pages.locators.base_locators import BaseLocators
 from pages.locators.main_page_locators import MainPageLocators
 import allure
 
@@ -35,7 +36,8 @@ class MainPage(BasePage):
         self.page.click(MainPageLocators.BOOK_STORE_CARD)
 
     @allure.step("Get Header")
-    def get_header(self):
-        return self.page.locator(MainPageLocators.HEADER)
+    def is_header_visible(self):
+        return self.page.locator(BaseLocators.HEADER_LINK)
+
 
 
