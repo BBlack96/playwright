@@ -1,3 +1,6 @@
+import os
+import shutil
+
 import allure
 import pytest
 from playwright.sync_api import sync_playwright
@@ -5,6 +8,16 @@ from playwright.sync_api import sync_playwright
 from config.config import Config
 
 headless = False
+screenshots_dir = "screenshots"
+videos_dir = "videos"
+
+
+@pytest.fixture(scope="session", autouse=True)
+def cleanup():
+    for directory in [screenshots_dir, videos_dir]:
+        if os.path.exists(directory):
+            shutil.rmtree(directory)
+        os.makedirs(directory)
 
 
 @pytest.fixture(scope="session")
@@ -21,7 +34,8 @@ def test_artifacts(request):
     if request.node.rep_call.failed:
         allure.attach.file(f"screenshots/{request.node.name}.png", name="screenshot",
                            attachment_type=allure.attachment_type.PNG)
-        allure.attach.file(f"videos/{request.node.name}.webm", name="video", attachment_type=allure.attachment_type.WEBM)
+        allure.attach.file(f"videos/{request.node.name}.webm", name="video",
+                           attachment_type=allure.attachment_type.WEBM)
 
 
 @pytest.fixture(scope="function")
